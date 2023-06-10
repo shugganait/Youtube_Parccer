@@ -29,22 +29,6 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_text_on_image"
-                android:layout_width="120dp"
-                android:layout_height="24dp"
-                android:background="@drawable/ic_text_in_image"
-                android:fontFamily="sans-serif-black"
-                android:paddingStart="54dp"
-                android:paddingTop="2dp"
-                android:text="@string/playlist"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/img_preview"
-                app:layout_constraintEnd_toEndOf="@id/img_preview"
-                app:layout_constraintStart_toStartOf="@id/img_preview"
-                tools:ignore="RtlSymmetry" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -57,20 +41,23 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-black"
+        android:maxLines="2"
         android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cv_pic"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title text" />
 
     <TextView
-        android:id="@+id/tv_count_videos"
+        android:id="@+id/tv_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:textColor="#757575"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_pic"
         app:layout_constraintStart_toStartOf="@id/tv_title"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        tools:text="@string/count_of_videos" />
+        tools:text="00:00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

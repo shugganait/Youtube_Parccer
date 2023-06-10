@@ -1,12 +1,11 @@
-package lib.kg.youtubeparccer.ui.adapters
+package lib.kg.youtubeparccer.ui.main.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import lib.kg.youtubeparccer.data.remote.model.Item
 import lib.kg.youtubeparccer.databinding.ItemPlaylistBinding
-import lib.kg.youtubeparccer.model.Item
-import lib.kg.youtubeparccer.model.Playlists
 import lib.kg.youtubeparccer.utils.loadImage
 
 class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapter<PlayListAdapter.PlayListViewHolder>() {
@@ -21,11 +20,8 @@ class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapte
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayListViewHolder {
-        return PlayListViewHolder(
-            ItemPlaylistBinding.inflate(
-                LayoutInflater.from(parent.context),
-            parent,
-            false))
+        val binding = ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlayListViewHolder, position: Int) {
@@ -41,9 +37,9 @@ class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapte
         @SuppressLint("SetTextI18n")
         fun bind(item: Item) {
             with(binding) {
-                tvTitle.text = item.snippet?.title
-                tvCountVideos.text = item.contentDetails?.itemCount.toString() + " video series"
-                imgPreview.loadImage(item.snippet?.thumbnails?.default?.url!!)
+                tvTitle.text = item.snippet.title
+                tvCountVideos.text = item.contentDetails.itemCount.toString() + " video series"
+                imgPreview.loadImage(item.snippet.thumbnails.high.url)
                 itemView.setOnClickListener {
                     onClick.invoke(item)
                 }

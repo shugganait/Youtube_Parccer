@@ -1,6 +1,7 @@
-package lib.kg.youtubeparccer.remote
+package lib.kg.youtubeparccer.core.network
 
 import lib.kg.youtubeparccer.BuildConfig.BASE_URL
+import lib.kg.youtubeparccer.data.remote.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

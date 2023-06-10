@@ -1,10 +1,9 @@
-package lib.kg.youtubeparccer.model
+package lib.kg.youtubeparccer.data.remote.model
 
 data class Playlists(
     val etag: String,
     val items: List<Item>,
     val kind: String,
-    val nextPageToken: String,
     val pageInfo: PageInfo
 )
 
@@ -16,14 +15,45 @@ data class Item(
     val snippet: Snippet
 )
 
+data class PageInfo(
+    val resultsPerPage: Int,
+    val totalResults: Int
+)
+
+data class ContentDetails(
+    val caption: String,
+    val definition: String,
+    val dimension: String,
+    val duration: String,
+    val licensedContent: Boolean,
+    val projection: String,
+    val itemCount: Int,
+    val videoId: String,
+    val videoPublishedAt: String
+)
+
 data class Snippet(
+    val categoryId: String,
     val channelId: String,
     val channelTitle: String,
+    val defaultAudioLanguage: String,
     val description: String,
+    val liveBroadcastContent: String,
     val localized: Localized,
+    val tags: List<String>,
+    val playlistId: String,
+    val position: Int,
     val publishedAt: String,
+    val resourceId: ResourceId,
     val thumbnails: Thumbnails,
-    val title: String
+    val title: String,
+    val videoOwnerChannelId: String,
+    val videoOwnerChannelTitle: String
+)
+
+data class ResourceId(
+    val kind: String,
+    val videoId: String
 )
 
 data class Thumbnails(
@@ -64,17 +94,9 @@ data class Maxres(
     val width: Int
 )
 
-data class ContentDetails(
-    val itemCount: Int
-)
-
 data class Localized(
     val description: String,
     val title: String
 )
 
-data class PageInfo(
-    val resultsPerPage: Int,
-    val totalResults: Int
-)
 

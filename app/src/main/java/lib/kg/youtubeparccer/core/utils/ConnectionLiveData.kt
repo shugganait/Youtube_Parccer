@@ -1,4 +1,4 @@
-package lib.kg.youtubeparccer.utils
+package lib.kg.youtubeparccer.core.utils
 
 import android.annotation.SuppressLint
 import android.app.Application

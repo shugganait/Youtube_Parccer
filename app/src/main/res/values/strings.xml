@@ -4,5 +4,25 @@
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="number_of_videos">number_of_videos</string>
     <string name="playlist">playlist</string>
+    <string name="Playlist">Playlist</string>
     <string name="count_of_videos">video series</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi porttitor porttitor maximus. Maecenas sit amet ultricies felis. In vel arcu tincidunt, aliquet diam ut, feugiat est. Duis lacus ligula, finibus quis pellentesque non, mollis nec dolor. Quisque scelerisque viverra ex, ut pulvinar orci hendrerit eget. Mauris malesuada quam nisi, quis ullamcorper mauris porta eget. Nunc varius sodales feugiat. Nullam vehicula a risus eu interdum. Cras sed arcu ante.
+
+Ut volutpat lorem malesuada justo auctor blandit. Pellentesque finibus enim fermentum, dapibus velit ac, interdum elit. Mauris aliquam mauris vitae metus dignissim iaculis. Quisque convallis vel nibh id dignissim. Sed id tempor massa, eget vulputate diam. In finibus rutrum efficitur. Sed lacinia eros arcu, at tincidunt turpis condimentum id. Duis non tortor quis est egestas feugiat.
+
+Praesent ligula ex, consectetur eget interdum et, venenatis sit amet risus. In hac habitasse platea dictumst. Suspendisse venenatis pulvinar justo, laoreet viverra lectus dapibus sit amet. Quisque tincidunt, libero quis fringilla aliquam, augue justo ullamcorper sem, et placerat mauris sem nec justo. Nunc ac auctor est, et lobortis turpis. Donec tempus sapien porttitor, condimentum odio id, interdum sapien. Phasellus varius eros lorem. Nam ac eleifend ex, non lacinia augue. Donec est purus, dictum porttitor feugiat eu, vehicula ut mauris. Integer laoreet at massa nec egestas. Aenean bibendum imperdiet sapien non ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean pulvinar nibh ligula, in commodo diam accumsan at. Sed euismod, justo in gravida gravida, nunc sem tincidunt magna, eget mattis mi mi varius sem. Donec sodales dapibus ex, in finibus arcu accumsan id.
+
+Phasellus semper placerat varius. Etiam vehicula venenatis justo, a malesuada lacus convallis viverra. Fusce laoreet egestas ipsum vel hendrerit. Pellentesque molestie elit vel iaculis mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam odio risus, lobortis et est at, finibus hendrerit lectus. Sed vulputate elit eu sem pharetra interdum. Vivamus vulputate ultrices finibus. Etiam feugiat aliquam odio. Praesent eu tempus urna. In convallis lobortis turpis, tempus viverra massa euismod quis.
+
+Integer interdum facilisis sodales. Pellentesque semper dui nec tempor mollis. Fusce placerat vulputate mauris nec rutrum. Aliquam mattis pharetra urna. Nam tempus a tortor in porttitor. Praesent hendrerit, ipsum ut rhoncus eleifend, mi felis tristique augue, ac pharetra magna nisl quis justo. Nam ut porta lorem. Etiam luctus ut arcu at maximus. Donec molestie tincidunt enim eu varius.</string>
+    <string name="back">Back</string>
+    <string name="main_description">main_Description</string>
+    <string name="video_series">% video series</string>
+    <string name="description_efsuebfysegfysefusebufb">Description efsuebfysegfysefusebufb</string>
+    <string name="download">Download</string>
+    <string name="_480p">480p</string>
+    <string name="_720p">720p</string>
+    <string name="_1080p">1080p</string>
+    <string name="select_video_quality">Select video quality</string>
+
 </resources>

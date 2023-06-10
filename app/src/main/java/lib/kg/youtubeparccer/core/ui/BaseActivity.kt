@@ -1,14 +1,8 @@
-package lib.kg.youtubeparccer.base
+package lib.kg.youtubeparccer.core.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivity() {
