@@ -87,7 +87,7 @@
                     android:layout_margin="16dp"
                     android:layout_marginBottom="11dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lorem"
+                    tools:text="@string/lorem"
                     android:textSize="16sp" />
 
 
