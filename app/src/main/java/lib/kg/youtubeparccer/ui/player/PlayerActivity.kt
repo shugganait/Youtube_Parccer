@@ -5,17 +5,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import lib.kg.youtubeparccer.core.results.Resource
 import lib.kg.youtubeparccer.core.ui.BaseActivity
 import lib.kg.youtubeparccer.core.utils.ConnectionLiveData
 import lib.kg.youtubeparccer.databinding.ActivityPlayerBinding
 import lib.kg.youtubeparccer.databinding.DownloadAlertDialogBinding
 import lib.kg.youtubeparccer.ui.playlist.PlaylistActivity.Companion.KEY_FOR_VIDEOID
-import lib.kg.youtubeparccer.utils.loadImage
 
-class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>() {
+class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>(), Player.Listener {
 
     private lateinit var dialogBinding: DownloadAlertDialogBinding
+    private lateinit var exoPlayer: ExoPlayer
 
     private fun inflateDialogBinding() {
         dialogBinding = DownloadAlertDialogBinding.inflate(layoutInflater)
@@ -42,7 +45,10 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>() {
                         with(binding) {
                             tvTitle.text = it.data?.items!![0].snippet.title
                             tvDescription.text = it.data.items[0].snippet.description
-                            imgVideo.loadImage(it.data.items[0].snippet.thumbnails.high.url)
+                            val url = "https://www.youtube.com/watch?v=${it.data.items[0].id}"
+                            val mediaItem = MediaItem.fromUri(url)
+                            exoPlayer.addMediaItem(mediaItem)
+                            exoPlayer.prepare()
                         }
                         viewModel.loading.postValue(false)
                     }
@@ -87,6 +93,13 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>() {
 
             dialog.show()
         }
+    }
+
+    override fun setUI() {
+        super.setUI()
+        exoPlayer = ExoPlayer.Builder(this).build()
+        binding.player.player = exoPlayer
+        exoPlayer.addListener(this)
     }
 
     override fun checkInternet() {

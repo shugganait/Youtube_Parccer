@@ -39,12 +39,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="240dp">
-            <ImageView
-                android:id="@+id/img_video"
-                tools:src="@drawable/photo_no_internet"
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/player"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
