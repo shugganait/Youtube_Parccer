@@ -1,8 +1,6 @@
 package lib.kg.youtubeparccer.data.remote
 
-import lib.kg.youtubeparccer.core.results.Resource
 import lib.kg.youtubeparccer.data.remote.model.Playlists
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -32,10 +30,5 @@ interface ApiService {
         @Query("id") videoId: String
     ): Response<Playlists>
 
-    @GET("videos")
-    fun getVideoForDuration(
-        @Query("part") part: String,
-        @Query("key") apiKey: String,
-        @Query("id") videoId: String
-    ): Call<Playlists>
+
 }

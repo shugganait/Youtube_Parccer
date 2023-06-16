@@ -1,4 +1,4 @@
-package lib.kg.youtubeparccer.ui.main.adapter
+package lib.kg.youtubeparccer.ui.playlist.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

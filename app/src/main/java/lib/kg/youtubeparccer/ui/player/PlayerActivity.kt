@@ -1,24 +1,23 @@
 package lib.kg.youtubeparccer.ui.player
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.*
 import lib.kg.youtubeparccer.core.results.Resource
 import lib.kg.youtubeparccer.core.ui.BaseActivity
 import lib.kg.youtubeparccer.core.utils.ConnectionLiveData
 import lib.kg.youtubeparccer.databinding.ActivityPlayerBinding
 import lib.kg.youtubeparccer.databinding.DownloadAlertDialogBinding
-import lib.kg.youtubeparccer.ui.playlist.PlaylistActivity.Companion.KEY_FOR_VIDEOID
+import lib.kg.youtubeparccer.ui.details.DetailsActivity.Companion.KEY_FOR_VIDEOID
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>(), Player.Listener {
 
     private lateinit var dialogBinding: DownloadAlertDialogBinding
-    private lateinit var exoPlayer: ExoPlayer
+    override val viewModel: PlayerViewModel by viewModel()
 
     private fun inflateDialogBinding() {
         dialogBinding = DownloadAlertDialogBinding.inflate(layoutInflater)
@@ -27,10 +26,6 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>(), P
     override fun inflateViewBinding(): ActivityPlayerBinding {
         inflateDialogBinding()
         return ActivityPlayerBinding.inflate(layoutInflater)
-    }
-
-    override fun setViewModel(): PlayerViewModel {
-        return ViewModelProvider(this)[PlayerViewModel::class.java]
     }
 
     override fun setupLiveData() {
@@ -45,10 +40,7 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>(), P
                         with(binding) {
                             tvTitle.text = it.data?.items!![0].snippet.title
                             tvDescription.text = it.data.items[0].snippet.description
-                            val url = "https://www.youtube.com/watch?v=${it.data.items[0].id}"
-                            val mediaItem = MediaItem.fromUri(url)
-                            exoPlayer.addMediaItem(mediaItem)
-                            exoPlayer.prepare()
+                            binding.webView.loadUrl("https://www.youtube.com/embed/${it.data.items[0].id}")
                         }
                         viewModel.loading.postValue(false)
                     }
@@ -64,48 +56,54 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding, PlayerViewModel>(), P
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun setUI() {
+        super.setUI()
+        binding.webView.settings.javaScriptEnabled = true
+    }
+
     override fun initClickListener() {
         super.initClickListener()
         binding.btnBack.setOnClickListener {
             finish()
         }
         binding.btnDownload.setOnClickListener {
-
-            val dialogBuilder = AlertDialog.Builder(this)
-                .setView(dialogBinding.root)
-
-            val dialog = dialogBuilder.create()
-
-            val parentView = dialogBinding.root.parent as? ViewGroup
-            parentView?.removeView(dialogBinding.root)
-
-            dialogBinding.btnDownload.setOnClickListener {
-                val selectedQuality = when (dialogBinding.radioGroup.checkedRadioButtonId) {
-                    dialogBinding.radioButton480.id -> "480p"
-                    dialogBinding.radioButton720.id -> "720p"
-                    dialogBinding.radioButton1080.id -> "1080p"
-                    else -> "null"
-                }
-                Toast.makeText(this, "Downloading video\nwith quality: $selectedQuality", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-
-            }
-
-            dialog.show()
+            showDownloadDialog()
         }
     }
 
-    override fun setUI() {
-        super.setUI()
-        exoPlayer = ExoPlayer.Builder(this).build()
-        binding.player.player = exoPlayer
-        exoPlayer.addListener(this)
+    private fun showDownloadDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+
+        val dialog = dialogBuilder.create()
+
+        val parentView = dialogBinding.root.parent as? ViewGroup
+        parentView?.removeView(dialogBinding.root)
+
+        dialogBinding.btnDownload.setOnClickListener {
+            val selectedQuality = when (dialogBinding.radioGroup.checkedRadioButtonId) {
+                dialogBinding.radioButton480.id -> "480p"
+                dialogBinding.radioButton720.id -> "720p"
+                dialogBinding.radioButton1080.id -> "1080p"
+                else -> "null"
+            }
+            Toast.makeText(
+                this,
+                "Downloading video\nwith quality: $selectedQuality",
+                Toast.LENGTH_SHORT
+            ).show()
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
     }
 
     override fun checkInternet() {
         super.checkInternet()
         ConnectionLiveData(application).observe(this) {
-            if (it){
+            if (it) {
                 binding.clNoInternet.isVisible = false
                 binding.llMainLayout.isVisible = true
             } else {
