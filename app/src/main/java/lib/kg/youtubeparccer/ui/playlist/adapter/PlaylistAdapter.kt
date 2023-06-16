@@ -1,6 +1,7 @@
 package lib.kg.youtubeparccer.ui.playlist.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,8 @@ import lib.kg.youtubeparccer.data.remote.model.Item
 import lib.kg.youtubeparccer.databinding.ItemPlaylistBinding
 import lib.kg.youtubeparccer.utils.loadImage
 
-class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapter<PlayListAdapter.PlayListViewHolder>() {
+class PlayListAdapter(private val onClick: (Item) -> Unit) :
+    RecyclerView.Adapter<PlayListAdapter.PlayListViewHolder>() {
 
     private var list = ArrayList<Item>()
 
@@ -20,7 +22,8 @@ class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapte
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayListViewHolder {
-        val binding = ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemPlaylistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlayListViewHolder(binding)
     }
 
@@ -39,7 +42,11 @@ class PlayListAdapter(private val onClick: (Item) -> Unit) : RecyclerView.Adapte
             with(binding) {
                 tvTitle.text = item.snippet.title
                 tvCountVideos.text = item.contentDetails.itemCount.toString() + " video series"
-                imgPreview.loadImage(item.snippet.thumbnails.high.url)
+                try {
+                    imgPreview.loadImage(item.snippet.thumbnails.high.url)
+                } catch (e: java.lang.NullPointerException) {
+                    Log.e("shug", "bind: ${e.message}")
+                }
                 itemView.setOnClickListener {
                     onClick.invoke(item)
                 }

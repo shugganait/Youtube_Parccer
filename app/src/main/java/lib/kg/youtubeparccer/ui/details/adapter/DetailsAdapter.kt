@@ -2,6 +2,7 @@ package lib.kg.youtubeparccer.ui.details.adapter
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -43,7 +44,12 @@ class DetailsAdapter(
             with(binding) {
                 tvTitle.text = item.snippet.title
                 tvDuration.text = "null(("
-                imgPreview.loadImage(item.snippet.thumbnails.high.url)
+                try {
+                    imgPreview.loadImage(item.snippet.thumbnails.high.url)
+                }catch (e: java.lang.NullPointerException) {
+                    Log.e("shug", "bind: ${e.message}", )
+                }
+
                 itemView.setOnClickListener {
                     onClick.invoke(item)
                 }
